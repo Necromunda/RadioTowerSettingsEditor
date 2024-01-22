@@ -6,7 +6,6 @@
 #include <QJsonArray>
 #include <QJsonObject>
 #include <QListWidget>
-#include <rtjson.h>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
