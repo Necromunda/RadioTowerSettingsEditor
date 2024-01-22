@@ -12,100 +12,100 @@ MainWindow::MainWindow(QJsonObject json, QString path, QWidget *parent)
     ui->setupUi(this);
 
 //    QObject::connect(this->ui->openBtn,                             &QPushButton::clicked, this, &MainWindow::openBtnClicked);
-    QObject::connect(this->ui->saveBtn,                             &QPushButton::clicked, this, &MainWindow::saveBtnClicked);
+    QObject::connect(ui->saveBtn,                             &QPushButton::clicked, this, &MainWindow::saveBtnClicked);
 
-    QObject::connect(this->ui->addLocationBtn,                      &QPushButton::clicked, this, &MainWindow::addLocationBtnClicked);
-    QObject::connect(this->ui->addCategoryBtn,                      &QPushButton::clicked, this, &MainWindow::addCategoryBtnClicked);
-    QObject::connect(this->ui->addItemBtn,                          &QPushButton::clicked, this, &MainWindow::addItemBtnClicked);
-    QObject::connect(this->ui->addAttachmentCategoryBtn,            &QPushButton::clicked, this, &MainWindow::addAttachmentCategoryBtnClicked);
-    QObject::connect(this->ui->addAttachmentBtn,                    &QPushButton::clicked, this, &MainWindow::addAttachmentBtnClicked);
-    QObject::connect(this->ui->addVehicleAttachmentBtn,             &QPushButton::clicked, this, &MainWindow::addVehicleAttachmentBtnClicked);
+    QObject::connect(ui->addLocationBtn,                      &QPushButton::clicked, this, &MainWindow::addLocationBtnClicked);
+    QObject::connect(ui->addCategoryBtn,                      &QPushButton::clicked, this, &MainWindow::addCategoryBtnClicked);
+    QObject::connect(ui->addItemBtn,                          &QPushButton::clicked, this, &MainWindow::addItemBtnClicked);
+    QObject::connect(ui->addAttachmentCategoryBtn,            &QPushButton::clicked, this, &MainWindow::addAttachmentCategoryBtnClicked);
+    QObject::connect(ui->addAttachmentBtn,                    &QPushButton::clicked, this, &MainWindow::addAttachmentBtnClicked);
+    QObject::connect(ui->addVehicleAttachmentBtn,             &QPushButton::clicked, this, &MainWindow::addVehicleAttachmentBtnClicked);
 
-    QObject::connect(this->ui->deleteLocationBtn,                   &QPushButton::clicked, this, &MainWindow::deleteLocationBtnClicked);
-    QObject::connect(this->ui->deleteCategoryBtn,                   &QPushButton::clicked, this, &MainWindow::deleteCategoryBtnClicked);
-    QObject::connect(this->ui->deleteItemBtn,                       &QPushButton::clicked, this, &MainWindow::deleteItemBtnClicked);
-    QObject::connect(this->ui->deleteAttachmentCategoryBtn,         &QPushButton::clicked, this, &MainWindow::deleteAttachmentCategoryBtnClicked);
-    QObject::connect(this->ui->deleteAttachmentBtn,                 &QPushButton::clicked, this, &MainWindow::deleteAttachmentBtnClicked);
-    QObject::connect(this->ui->deleteVehicleAttachmentBtn,          &QPushButton::clicked, this, &MainWindow::deleteVehicleAttachmentBtnClicked);
+    QObject::connect(ui->deleteLocationBtn,                   &QPushButton::clicked, this, &MainWindow::deleteLocationBtnClicked);
+    QObject::connect(ui->deleteCategoryBtn,                   &QPushButton::clicked, this, &MainWindow::deleteCategoryBtnClicked);
+    QObject::connect(ui->deleteItemBtn,                       &QPushButton::clicked, this, &MainWindow::deleteItemBtnClicked);
+    QObject::connect(ui->deleteAttachmentCategoryBtn,         &QPushButton::clicked, this, &MainWindow::deleteAttachmentCategoryBtnClicked);
+    QObject::connect(ui->deleteAttachmentBtn,                 &QPushButton::clicked, this, &MainWindow::deleteAttachmentBtnClicked);
+    QObject::connect(ui->deleteVehicleAttachmentBtn,          &QPushButton::clicked, this, &MainWindow::deleteVehicleAttachmentBtnClicked);
 
-    QObject::connect(this->ui->copyLocationBtn,                     &QPushButton::clicked, this, &MainWindow::copyLocationBtnClicked);
-    QObject::connect(this->ui->copyVehicleAttachmentBtn,            &QPushButton::clicked, this, &MainWindow::copyVehicleAttachmentBtnClicked);
-    QObject::connect(this->ui->copyCategoryBtn,                     &QPushButton::clicked, this, &MainWindow::copyCategoryBtnClicked);
-    QObject::connect(this->ui->copyItemBtn,                         &QPushButton::clicked, this, &MainWindow::copyItemBtnClicked);
-    QObject::connect(this->ui->copyAttachmentCategoryBtn,           &QPushButton::clicked, this, &MainWindow::copyAttachmentCategoryBtnClicked);
-    QObject::connect(this->ui->copyAttachmentBtn,                   &QPushButton::clicked, this, &MainWindow::copyAttachmentBtnClicked);
+    QObject::connect(ui->copyLocationBtn,                     &QPushButton::clicked, this, &MainWindow::copyLocationBtnClicked);
+    QObject::connect(ui->copyVehicleAttachmentBtn,            &QPushButton::clicked, this, &MainWindow::copyVehicleAttachmentBtnClicked);
+    QObject::connect(ui->copyCategoryBtn,                     &QPushButton::clicked, this, &MainWindow::copyCategoryBtnClicked);
+    QObject::connect(ui->copyItemBtn,                         &QPushButton::clicked, this, &MainWindow::copyItemBtnClicked);
+    QObject::connect(ui->copyAttachmentCategoryBtn,           &QPushButton::clicked, this, &MainWindow::copyAttachmentCategoryBtnClicked);
+    QObject::connect(ui->copyAttachmentBtn,                   &QPushButton::clicked, this, &MainWindow::copyAttachmentBtnClicked);
 
-    QObject::connect(this->ui->pasteLocationBtn,                    &QPushButton::clicked, this, &MainWindow::pasteLocationBtnClicked);
-    QObject::connect(this->ui->pasteVehicleAttachmentBtn,           &QPushButton::clicked, this, &MainWindow::pasteVehicleAttachmentBtnClicked);
-    QObject::connect(this->ui->pasteCategoryBtn,                    &QPushButton::clicked, this, &MainWindow::pasteCategoryBtnClicked);
-    QObject::connect(this->ui->pasteItemBtn,                        &QPushButton::clicked, this, &MainWindow::pasteItemBtnClicked);
-    QObject::connect(this->ui->pasteAttachmentCategoryBtn,          &QPushButton::clicked, this, &MainWindow::pasteAttachmentCategoryBtnClicked);
-    QObject::connect(this->ui->pasteAttachmentBtn,                  &QPushButton::clicked, this, &MainWindow::pasteAttachmentBtnClicked);
+    QObject::connect(ui->pasteLocationBtn,                    &QPushButton::clicked, this, &MainWindow::pasteLocationBtnClicked);
+    QObject::connect(ui->pasteVehicleAttachmentBtn,           &QPushButton::clicked, this, &MainWindow::pasteVehicleAttachmentBtnClicked);
+    QObject::connect(ui->pasteCategoryBtn,                    &QPushButton::clicked, this, &MainWindow::pasteCategoryBtnClicked);
+    QObject::connect(ui->pasteItemBtn,                        &QPushButton::clicked, this, &MainWindow::pasteItemBtnClicked);
+    QObject::connect(ui->pasteAttachmentCategoryBtn,          &QPushButton::clicked, this, &MainWindow::pasteAttachmentCategoryBtnClicked);
+    QObject::connect(ui->pasteAttachmentBtn,                  &QPushButton::clicked, this, &MainWindow::pasteAttachmentBtnClicked);
 
-//    QObject::connect(this->ui->duplicateLocationBtn,                &QPushButton::clicked, this, &MainWindow::duplicateLocationBtnClicked);
-//    QObject::connect(this->ui->duplicateItemBtn,                    &QPushButton::clicked, this, &MainWindow::duplicateItemBtnClicked);
-//    QObject::connect(this->ui->duplicateCategoryBtn,                &QPushButton::clicked, this, &MainWindow::duplicateCategoryBtnClicked);
-//    QObject::connect(this->ui->duplicateAttachmentCategoryBtn,      &QPushButton::clicked, this, &MainWindow::duplicateAttachmentCategoryBtnClicked);
-//    QObject::connect(this->ui->duplicateAttachmentBtn,              &QPushButton::clicked, this, &MainWindow::duplicateAttachmentBtnClicked);
-//    QObject::connect(this->ui->duplicateVehicleAttachmentBtn,       &QPushButton::clicked, this, &MainWindow::duplicateVehicleAttachmentBtnClicked);
+//    QObject::connect(ui->duplicateLocationBtn,                &QPushButton::clicked, this, &MainWindow::duplicateLocationBtnClicked);
+//    QObject::connect(ui->duplicateItemBtn,                    &QPushButton::clicked, this, &MainWindow::duplicateItemBtnClicked);
+//    QObject::connect(ui->duplicateCategoryBtn,                &QPushButton::clicked, this, &MainWindow::duplicateCategoryBtnClicked);
+//    QObject::connect(ui->duplicateAttachmentCategoryBtn,      &QPushButton::clicked, this, &MainWindow::duplicateAttachmentCategoryBtnClicked);
+//    QObject::connect(ui->duplicateAttachmentBtn,              &QPushButton::clicked, this, &MainWindow::duplicateAttachmentBtnClicked);
+//    QObject::connect(ui->duplicateVehicleAttachmentBtn,       &QPushButton::clicked, this, &MainWindow::duplicateVehicleAttachmentBtnClicked);
 
-    QObject::connect(this->ui->locationCaptureAreaRadiusSlider,     &QSlider::valueChanged, this, &MainWindow::radiusSliderValueChanged);
-    QObject::connect(this->ui->locationCaptureAreaHeightSlider,     &QSlider::valueChanged, this, &MainWindow::heightSliderValueChanged);
-    QObject::connect(this->ui->locationCaptureAreaYOffsetSlider,    &QSlider::valueChanged, this, &MainWindow::YOffsetSliderValueChanged);
+    QObject::connect(ui->locationCaptureAreaRadiusSlider,     &QSlider::valueChanged, this, &MainWindow::radiusSliderValueChanged);
+    QObject::connect(ui->locationCaptureAreaHeightSlider,     &QSlider::valueChanged, this, &MainWindow::heightSliderValueChanged);
+    QObject::connect(ui->locationCaptureAreaYOffsetSlider,    &QSlider::valueChanged, this, &MainWindow::YOffsetSliderValueChanged);
 
-    QObject::connect(this->ui->locationsLW,                         &QListWidget::currentItemChanged, this, &MainWindow::locationLWItemChanged);
-    QObject::connect(this->ui->categoriesLW,                        &QListWidget::currentItemChanged, this, &MainWindow::categoryLWItemChanged);
-    QObject::connect(this->ui->itemsLW,                             &QListWidget::currentItemChanged, this, &MainWindow::itemLWItemChanged);
-    QObject::connect(this->ui->attachmentCategoriesLW,              &QListWidget::currentItemChanged, this, &MainWindow::attachmentCategoryLWItemChanged);
-    QObject::connect(this->ui->attachmentsLW,                       &QListWidget::currentItemChanged, this, &MainWindow::attachmentLWItemChanged);
-    QObject::connect(this->ui->vehicleAttachmentsLW,                &QListWidget::currentItemChanged, this, &MainWindow::vehicleAttachmentLWItemChanged);
+    QObject::connect(ui->locationsLW,                         &QListWidget::currentItemChanged, this, &MainWindow::locationLWItemChanged);
+    QObject::connect(ui->categoriesLW,                        &QListWidget::currentItemChanged, this, &MainWindow::categoryLWItemChanged);
+    QObject::connect(ui->itemsLW,                             &QListWidget::currentItemChanged, this, &MainWindow::itemLWItemChanged);
+    QObject::connect(ui->attachmentCategoriesLW,              &QListWidget::currentItemChanged, this, &MainWindow::attachmentCategoryLWItemChanged);
+    QObject::connect(ui->attachmentsLW,                       &QListWidget::currentItemChanged, this, &MainWindow::attachmentLWItemChanged);
+    QObject::connect(ui->vehicleAttachmentsLW,                &QListWidget::currentItemChanged, this, &MainWindow::vehicleAttachmentLWItemChanged);
 
-    QObject::connect(this->ui->locationNameLE,                      &QLineEdit::textChanged, this, &MainWindow::locationNameLETextChanged);
-    QObject::connect(this->ui->locationLootcrateLE,                 &QLineEdit::textChanged, this, &MainWindow::locationLootcrateClassNameLETextChanged);
-    QObject::connect(this->ui->locationVehicleNameLE,               &QLineEdit::textChanged, this, &MainWindow::locationVehicleClassNameLETextChanged);
-    QObject::connect(this->ui->categoryNameLE,                      &QLineEdit::textChanged, this, &MainWindow::categoryNameLETextChanged);
-    QObject::connect(this->ui->itemNameLE,                          &QLineEdit::textChanged, this, &MainWindow::itemClassNameLETextChanged);
-    QObject::connect(this->ui->attachmentCategoryNameLE,            &QLineEdit::textChanged, this, &MainWindow::attachmentCategoryNameLETextChanged);
-    QObject::connect(this->ui->attachmentNameLE,                    &QLineEdit::textChanged, this, &MainWindow::attachmentClassNameLETextChanged);
+    QObject::connect(ui->locationNameLE,                      &QLineEdit::textChanged, this, &MainWindow::locationNameLETextChanged);
+    QObject::connect(ui->locationLootcrateLE,                 &QLineEdit::textChanged, this, &MainWindow::locationLootcrateClassNameLETextChanged);
+    QObject::connect(ui->locationVehicleNameLE,               &QLineEdit::textChanged, this, &MainWindow::locationVehicleClassNameLETextChanged);
+    QObject::connect(ui->categoryNameLE,                      &QLineEdit::textChanged, this, &MainWindow::categoryNameLETextChanged);
+    QObject::connect(ui->itemNameLE,                          &QLineEdit::textChanged, this, &MainWindow::itemClassNameLETextChanged);
+    QObject::connect(ui->attachmentCategoryNameLE,            &QLineEdit::textChanged, this, &MainWindow::attachmentCategoryNameLETextChanged);
+    QObject::connect(ui->attachmentNameLE,                    &QLineEdit::textChanged, this, &MainWindow::attachmentClassNameLETextChanged);
 
-    QObject::connect(this->ui->locationXCoordinateLE,               &QLineEdit::textChanged, this, &MainWindow::locationXCoordinateLETextChanged);
-    QObject::connect(this->ui->locationLootcrateXCoordinateLE,      &QLineEdit::textChanged, this, &MainWindow::locationLootcrateXCoordinateLETextChanged);
-    QObject::connect(this->ui->locationVehicleXCoordinateLE,        &QLineEdit::textChanged, this, &MainWindow::locationVehicleXCoordinateLETextChanged);
+    QObject::connect(ui->locationXCoordinateLE,               &QLineEdit::textChanged, this, &MainWindow::locationXCoordinateLETextChanged);
+    QObject::connect(ui->locationLootcrateXCoordinateLE,      &QLineEdit::textChanged, this, &MainWindow::locationLootcrateXCoordinateLETextChanged);
+    QObject::connect(ui->locationVehicleXCoordinateLE,        &QLineEdit::textChanged, this, &MainWindow::locationVehicleXCoordinateLETextChanged);
 
-    QObject::connect(this->ui->locationYCoordinateLE,               &QLineEdit::textChanged, this, &MainWindow::locationYCoordinateLETextChanged);
-    QObject::connect(this->ui->locationLootcrateYCoordinateLE,      &QLineEdit::textChanged, this, &MainWindow::locationLootcrateYCoordinateLETextChanged);
-    QObject::connect(this->ui->locationVehicleYCoordinateLE,        &QLineEdit::textChanged, this, &MainWindow::locationVehicleYCoordinateLETextChanged);
+    QObject::connect(ui->locationYCoordinateLE,               &QLineEdit::textChanged, this, &MainWindow::locationYCoordinateLETextChanged);
+    QObject::connect(ui->locationLootcrateYCoordinateLE,      &QLineEdit::textChanged, this, &MainWindow::locationLootcrateYCoordinateLETextChanged);
+    QObject::connect(ui->locationVehicleYCoordinateLE,        &QLineEdit::textChanged, this, &MainWindow::locationVehicleYCoordinateLETextChanged);
 
-    QObject::connect(this->ui->locationZCoordinateLE,               &QLineEdit::textChanged, this, &MainWindow::locationZCoordinateLETextChanged);
-    QObject::connect(this->ui->locationLootcrateZCoordinateLE,      &QLineEdit::textChanged, this, &MainWindow::locationLootcrateZCoordinateLETextChanged);
-    QObject::connect(this->ui->locationVehicleZCoordinateLE,        &QLineEdit::textChanged, this, &MainWindow::locationVehicleZCoordinateLETextChanged);
+    QObject::connect(ui->locationZCoordinateLE,               &QLineEdit::textChanged, this, &MainWindow::locationZCoordinateLETextChanged);
+    QObject::connect(ui->locationLootcrateZCoordinateLE,      &QLineEdit::textChanged, this, &MainWindow::locationLootcrateZCoordinateLETextChanged);
+    QObject::connect(ui->locationVehicleZCoordinateLE,        &QLineEdit::textChanged, this, &MainWindow::locationVehicleZCoordinateLETextChanged);
 
-    QObject::connect(this->ui->locationYOrientationLE,              &QLineEdit::textChanged, this, &MainWindow::locationYOrientationLETextChanged);
-    QObject::connect(this->ui->locationLootcrateYOrientationLE,     &QLineEdit::textChanged, this, &MainWindow::locationLootcrateYOrientationLETextChanged);
-    QObject::connect(this->ui->locationVehicleYOrientationLE,       &QLineEdit::textChanged, this, &MainWindow::locationVehicleYOrientationLETextChanged);
+    QObject::connect(ui->locationYOrientationLE,              &QLineEdit::textChanged, this, &MainWindow::locationYOrientationLETextChanged);
+    QObject::connect(ui->locationLootcrateYOrientationLE,     &QLineEdit::textChanged, this, &MainWindow::locationLootcrateYOrientationLETextChanged);
+    QObject::connect(ui->locationVehicleYOrientationLE,       &QLineEdit::textChanged, this, &MainWindow::locationVehicleYOrientationLETextChanged);
 
-    QObject::connect(this->ui->locationPOrientationLE,              &QLineEdit::textChanged, this, &MainWindow::locationPOrientationLETextChanged);
-    QObject::connect(this->ui->locationLootcratePOrientationLE,     &QLineEdit::textChanged, this, &MainWindow::locationLootcratePOrientationLETextChanged);
-    QObject::connect(this->ui->locationVehiclePOrientationLE,       &QLineEdit::textChanged, this, &MainWindow::locationVehiclePOrientationLETextChanged);
+    QObject::connect(ui->locationPOrientationLE,              &QLineEdit::textChanged, this, &MainWindow::locationPOrientationLETextChanged);
+    QObject::connect(ui->locationLootcratePOrientationLE,     &QLineEdit::textChanged, this, &MainWindow::locationLootcratePOrientationLETextChanged);
+    QObject::connect(ui->locationVehiclePOrientationLE,       &QLineEdit::textChanged, this, &MainWindow::locationVehiclePOrientationLETextChanged);
 
-    QObject::connect(this->ui->locationROrientationLE,              &QLineEdit::textChanged, this, &MainWindow::locationROrientationLETextChanged);
-    QObject::connect(this->ui->locationVehicleROrientationLE,       &QLineEdit::textChanged, this, &MainWindow::locationVehicleROrientationLETextChanged);
-    QObject::connect(this->ui->locationLootcrateROrientationLE,     &QLineEdit::textChanged, this, &MainWindow::locationLootcrateROrientationLETextChanged);
+    QObject::connect(ui->locationROrientationLE,              &QLineEdit::textChanged, this, &MainWindow::locationROrientationLETextChanged);
+    QObject::connect(ui->locationVehicleROrientationLE,       &QLineEdit::textChanged, this, &MainWindow::locationVehicleROrientationLETextChanged);
+    QObject::connect(ui->locationLootcrateROrientationLE,     &QLineEdit::textChanged, this, &MainWindow::locationLootcrateROrientationLETextChanged);
 
-    QObject::connect(this->ui->locationCaptureAreaRadiusSlider,     &QSlider::valueChanged, this, &MainWindow::locationCaptureAreaRadiusSliderValueChanged);
-    QObject::connect(this->ui->locationCaptureAreaHeightSlider,     &QSlider::valueChanged, this, &MainWindow::locationCaptureAreaHeightSliderValueChanged);
-    QObject::connect(this->ui->locationCaptureAreaYOffsetSlider,    &QSlider::valueChanged, this, &MainWindow::locationCaptureAreaYOffsetSliderValueChanged);
+    QObject::connect(ui->locationCaptureAreaRadiusSlider,     &QSlider::valueChanged, this, &MainWindow::locationCaptureAreaRadiusSliderValueChanged);
+    QObject::connect(ui->locationCaptureAreaHeightSlider,     &QSlider::valueChanged, this, &MainWindow::locationCaptureAreaHeightSliderValueChanged);
+    QObject::connect(ui->locationCaptureAreaYOffsetSlider,    &QSlider::valueChanged, this, &MainWindow::locationCaptureAreaYOffsetSliderValueChanged);
 
-    QObject::connect(this->ui->locationZombieCountSB,               &QSpinBox::valueChanged, this, &MainWindow::locationZombieCountSBValueChanged);
-    QObject::connect(this->ui->locationLootCountSB,                 &QSpinBox::valueChanged, this, &MainWindow::locationLootCountSBValueChanged);
-    QObject::connect(this->ui->categoryLootLimitSB,                 &QSpinBox::valueChanged, this, &MainWindow::categoryLootLimitSBValueChanged);
-    QObject::connect(this->ui->itemQuantitySB,                      &QSpinBox::valueChanged, this, &MainWindow::itemQuantitySBValueChanged);
+    QObject::connect(ui->locationZombieCountSB,               &QSpinBox::valueChanged, this, &MainWindow::locationZombieCountSBValueChanged);
+    QObject::connect(ui->locationLootCountSB,                 &QSpinBox::valueChanged, this, &MainWindow::locationLootCountSBValueChanged);
+    QObject::connect(ui->categoryLootLimitSB,                 &QSpinBox::valueChanged, this, &MainWindow::categoryLootLimitSBValueChanged);
+    QObject::connect(ui->itemQuantitySB,                      &QSpinBox::valueChanged, this, &MainWindow::itemQuantitySBValueChanged);
 
-    QObject::connect(this->ui->locationVehicleProbabilityDSB,       &QDoubleSpinBox::valueChanged, this, &MainWindow::locationVehicleProbabilityDSBValueChanged);
-    QObject::connect(this->ui->categoryProbabilityDSB,              &QDoubleSpinBox::valueChanged, this, &MainWindow::categoryProbabilityDSBValueChanged);
-    QObject::connect(this->ui->itemProbabilityDSB,                  &QDoubleSpinBox::valueChanged, this, &MainWindow::itemProbabilityDSBValueChanged);
-    QObject::connect(this->ui->attachmentCategoryProbabilityDSB,    &QDoubleSpinBox::valueChanged, this, &MainWindow::attachmentCategoryProbabilityDSBValueChanged);
-    QObject::connect(this->ui->attachmentProbabilityDSB,            &QDoubleSpinBox::valueChanged, this, &MainWindow::attachmentProbabilityDSBValueChanged);
+    QObject::connect(ui->locationVehicleProbabilityDSB,       &QDoubleSpinBox::valueChanged, this, &MainWindow::locationVehicleProbabilityDSBValueChanged);
+    QObject::connect(ui->categoryProbabilityDSB,              &QDoubleSpinBox::valueChanged, this, &MainWindow::categoryProbabilityDSBValueChanged);
+    QObject::connect(ui->itemProbabilityDSB,                  &QDoubleSpinBox::valueChanged, this, &MainWindow::itemProbabilityDSBValueChanged);
+    QObject::connect(ui->attachmentCategoryProbabilityDSB,    &QDoubleSpinBox::valueChanged, this, &MainWindow::attachmentCategoryProbabilityDSBValueChanged);
+    QObject::connect(ui->attachmentProbabilityDSB,            &QDoubleSpinBox::valueChanged, this, &MainWindow::attachmentProbabilityDSBValueChanged);
 
     setState(MainWindow::Init);
     setup(json, path);

@@ -6,6 +6,7 @@
 #include <QJsonArray>
 #include <QJsonObject>
 #include <QListWidget>
+#include <rtjson.h>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -65,6 +66,20 @@ public slots:
     void deleteAttachmentBtnClicked();
     void deleteVehicleAttachmentBtnClicked();
 
+    void copyLocationBtnClicked();
+    void copyVehicleAttachmentBtnClicked();
+    void copyCategoryBtnClicked();
+    void copyItemBtnClicked();
+    void copyAttachmentCategoryBtnClicked();
+    void copyAttachmentBtnClicked();
+
+    void pasteLocationBtnClicked();
+    void pasteVehicleAttachmentBtnClicked();
+    void pasteCategoryBtnClicked();
+    void pasteItemBtnClicked();
+    void pasteAttachmentCategoryBtnClicked();
+    void pasteAttachmentBtnClicked();
+
 //    void duplicateLocationBtnClicked();
 //    void duplicateCategoryBtnClicked();
 //    void duplicateItemBtnClicked();
@@ -121,19 +136,6 @@ public slots:
     void attachmentClassNameLETextChanged(const QString &arg1);
     void attachmentProbabilityDSBValueChanged(double value);   
 
-    void copyLocationBtnClicked();
-    void copyVehicleAttachmentBtnClicked();
-    void copyCategoryBtnClicked();
-    void copyItemBtnClicked();
-    void copyAttachmentCategoryBtnClicked();
-    void copyAttachmentBtnClicked();
-
-    void pasteLocationBtnClicked();
-    void pasteVehicleAttachmentBtnClicked();
-    void pasteCategoryBtnClicked();
-    void pasteItemBtnClicked();
-    void pasteAttachmentCategoryBtnClicked();
-    void pasteAttachmentBtnClicked();
 private:
     Ui::MainWindow *ui;
 

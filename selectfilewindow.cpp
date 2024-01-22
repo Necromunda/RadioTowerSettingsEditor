@@ -142,7 +142,7 @@ void SelectFileWindow::editFileBtnClicked()
     file.close();
     QJsonDocument doc = QJsonDocument::fromJson(val.toUtf8());
     QJsonObject jsonRootObj = doc.object();
-    editor = new MainWindow(jsonRootObj, path);
+    editor = new MainWindow(jsonRootObj, path, this);
     editor->show();
     this->hide();
     QObject::connect(editor, &MainWindow::CloseWindow, this, &SelectFileWindow::editorClosed);
