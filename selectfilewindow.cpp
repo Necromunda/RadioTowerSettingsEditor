@@ -71,7 +71,7 @@ void SelectFileWindow::createFile()
     eventLocations.append(eventLocation);
     root.insert("eventLocations", QJsonValue::fromVariant(eventLocations));
 
-    QString filePath = QFileDialog::getSaveFileName(this, tr("Save File"), QDir::homePath(), tr("JSON Files (*.json);;All Files (*)"));
+    QString filePath = QFileDialog::getSaveFileName(this, tr("Save File"), "C:/", tr("JSON Files (*.json);;All Files (*)"));
 
     if (!filePath.isEmpty())
     {
@@ -101,9 +101,9 @@ void SelectFileWindow::createFile()
 
 void SelectFileWindow::browseFilesBtnClicked()
 {
-    qDebug() << "Select file";
+//    qDebug() << "Select file";
 
-    QString path = QFileDialog::getOpenFileName(this, tr("Open File"), "E:/SteamLibrary/steamapps/common/DayZServer/Profiles/RadioTower", tr("Files (*.json)"));
+    QString path = QFileDialog::getOpenFileName(this, tr("Open File"), "C:/", tr("Files (*.json)"));
 
     if (path.isEmpty())
         return;
@@ -124,6 +124,12 @@ void SelectFileWindow::editFileBtnClicked()
     QString path = ui->filepathLE->text();
     QString val;
     QFile file(path);
+
+    if (path.isEmpty())
+    {
+        QMessageBox::warning(this, tr("Error"), tr("File not selected"));
+        return;
+    }
 
     if (!file.exists())
     {

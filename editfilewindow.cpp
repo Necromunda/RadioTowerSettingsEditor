@@ -146,7 +146,6 @@ void MainWindow::setState(AppState appState)
 
 void MainWindow::updateUI()
 {
-    qDebug() << "SetState: " << state;
     switch (state)
     {
         case MainWindow::Init:
@@ -308,8 +307,6 @@ void MainWindow::updateUI()
 
 void MainWindow::saveBtnClicked()
 {
-    qDebug() << "Save file";
-
     QFile file;
     file.setFileName(filepath);
     if (!file.exists())
@@ -521,7 +518,7 @@ void MainWindow::locationLWItemChanged(QListWidgetItem *current, QListWidgetItem
 
     selectedLocationIndex = ui->locationsLW->indexFromItem(current).row();
 
-    qDebug() << "Selected location at index " << selectedLocationIndex;
+//    qDebug() << "Selected location at index " << selectedLocationIndex;
 
     QString locationTitle = current->text();
     QJsonArray locations = jsonRootObj["eventLocations"].toArray();
@@ -552,7 +549,7 @@ void MainWindow::locationLWItemChanged(QListWidgetItem *current, QListWidgetItem
         totalCategoriesProbability += category["probability"].toDouble();
         ui->categoriesLW->addItem(title);
     }
-    qDebug() << locationCoordinates;
+
     ui->categoriesTotalProbabilityValueLabel->setText(QString("%1").arg(totalCategoriesProbability, 0, 'f', 5));
     ui->locationNameLE->setText(location["locationTitle"].toString());
     ui->locationXCoordinateLE->setText(QString::number(locationCoordinates[0].toDouble(), 'f', 4));
@@ -582,7 +579,7 @@ void MainWindow::locationLWItemChanged(QListWidgetItem *current, QListWidgetItem
     ui->locationZombieCountSB->setValue(location["zombieCount"].toInt());
     ui->locationLootCountSB->setValue(locationLoot["lootCount"].toInt());
     ui->locationsLE->setText(locationTitle);
-    qDebug() << "Here 2";
+
     setState(MainWindow::LocationSelected);
 }
 
@@ -594,7 +591,7 @@ void MainWindow::categoryLWItemChanged(QListWidgetItem *current, QListWidgetItem
 
     selectedCategoryIndex = ui->categoriesLW->indexFromItem(current).row();
 
-    qDebug() << "Selected category at index " << selectedCategoryIndex;
+//    qDebug() << "Selected category at index " << selectedCategoryIndex;
 
     QString categoryTitle = current->text();
     QJsonArray locations = jsonRootObj["eventLocations"].toArray();
@@ -630,7 +627,7 @@ void MainWindow::itemLWItemChanged(QListWidgetItem *current, QListWidgetItem *pr
 
     selectedItemIndex = ui->itemsLW->indexFromItem(current).row();
 
-    qDebug() << "Selected item at index " << selectedItemIndex;
+//    qDebug() << "Selected item at index " << selectedItemIndex;
 
     QString itemTitle = current->text();
     QJsonArray locations = jsonRootObj["eventLocations"].toArray();
@@ -673,7 +670,7 @@ void MainWindow::attachmentCategoryLWItemChanged(QListWidgetItem *current, QList
 
     selectedAttachmentCategoryIndex = ui->attachmentCategoriesLW->indexFromItem(current).row();
 
-    qDebug() << "Selected attachment category at index " << selectedAttachmentCategoryIndex;
+//    qDebug() << "Selected attachment category at index " << selectedAttachmentCategoryIndex;
 
     QString attachmentCategoryTitle = current->text();
     QJsonArray locations = jsonRootObj["eventLocations"].toArray();
@@ -718,7 +715,7 @@ void MainWindow::attachmentLWItemChanged(QListWidgetItem *current, QListWidgetIt
 {
     selectedAttachmentIndex = ui->attachmentsLW->indexFromItem(current).row();
 
-    qDebug() << "Selected attachment at index " << selectedAttachmentIndex;
+//    qDebug() << "Selected attachment at index " << selectedAttachmentIndex;
 
     QString attachmentTitle = current->text();
     QJsonArray locations = jsonRootObj["eventLocations"].toArray();
