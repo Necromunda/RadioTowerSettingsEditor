@@ -80,13 +80,6 @@ public slots:
     void pasteAttachmentCategoryBtnClicked();
     void pasteAttachmentBtnClicked();
 
-//    void duplicateLocationBtnClicked();
-//    void duplicateCategoryBtnClicked();
-//    void duplicateItemBtnClicked();
-//    void duplicateAttachmentCategoryBtnClicked();
-//    void duplicateAttachmentBtnClicked();
-//    void duplicateVehicleAttachmentBtnClicked();
-
     void radiusSliderValueChanged(int value);
     void heightSliderValueChanged(int value);
     void YOffsetSliderValueChanged(int value);
@@ -139,7 +132,6 @@ public slots:
 private:
     Ui::MainWindow *ui;
 
-//    QStringList filenames = {"RTLocations"};
     QJsonObject jsonRootObj;
     QString filepath;
     AppState state;

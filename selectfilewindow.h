@@ -18,7 +18,6 @@ public:
     ~SelectFileWindow();
 
     bool isFileValid(QString path);
-//    void openFile(QString path);
 
 public slots:
     void editorClosed();

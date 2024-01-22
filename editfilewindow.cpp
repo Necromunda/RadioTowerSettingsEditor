@@ -11,7 +11,6 @@ MainWindow::MainWindow(QJsonObject json, QString path, QWidget *parent)
 {
     ui->setupUi(this);
 
-//    QObject::connect(this->ui->openBtn,                             &QPushButton::clicked, this, &MainWindow::openBtnClicked);
     QObject::connect(ui->saveBtn,                             &QPushButton::clicked, this, &MainWindow::saveBtnClicked);
 
     QObject::connect(ui->addLocationBtn,                      &QPushButton::clicked, this, &MainWindow::addLocationBtnClicked);
@@ -41,13 +40,6 @@ MainWindow::MainWindow(QJsonObject json, QString path, QWidget *parent)
     QObject::connect(ui->pasteItemBtn,                        &QPushButton::clicked, this, &MainWindow::pasteItemBtnClicked);
     QObject::connect(ui->pasteAttachmentCategoryBtn,          &QPushButton::clicked, this, &MainWindow::pasteAttachmentCategoryBtnClicked);
     QObject::connect(ui->pasteAttachmentBtn,                  &QPushButton::clicked, this, &MainWindow::pasteAttachmentBtnClicked);
-
-//    QObject::connect(ui->duplicateLocationBtn,                &QPushButton::clicked, this, &MainWindow::duplicateLocationBtnClicked);
-//    QObject::connect(ui->duplicateItemBtn,                    &QPushButton::clicked, this, &MainWindow::duplicateItemBtnClicked);
-//    QObject::connect(ui->duplicateCategoryBtn,                &QPushButton::clicked, this, &MainWindow::duplicateCategoryBtnClicked);
-//    QObject::connect(ui->duplicateAttachmentCategoryBtn,      &QPushButton::clicked, this, &MainWindow::duplicateAttachmentCategoryBtnClicked);
-//    QObject::connect(ui->duplicateAttachmentBtn,              &QPushButton::clicked, this, &MainWindow::duplicateAttachmentBtnClicked);
-//    QObject::connect(ui->duplicateVehicleAttachmentBtn,       &QPushButton::clicked, this, &MainWindow::duplicateVehicleAttachmentBtnClicked);
 
     QObject::connect(ui->locationCaptureAreaRadiusSlider,     &QSlider::valueChanged, this, &MainWindow::radiusSliderValueChanged);
     QObject::connect(ui->locationCaptureAreaHeightSlider,     &QSlider::valueChanged, this, &MainWindow::heightSliderValueChanged);
@@ -235,76 +227,6 @@ void MainWindow::updateUI()
     }
 }
 
-//bool MainWindow::isFileValid(QString path)
-//{
-//    for (int i = 0; i < filenames.size(); i++)
-//    {
-//        if (path.contains(filenames[i], Qt::CaseInsensitive))
-//        {
-//            return true;
-//        }
-//    }
-//    return false;
-//}
-
-//void MainWindow::openFile(QString path)
-//{
-//    if (!path.isEmpty())
-//    {
-//        bool isValid = this->isFileValid(path);
-
-//        if (!isValid)
-//        {
-//            QMessageBox::warning(this, tr("File not valid"), tr("This tool can only be used to edit RTLocations.json"));
-//            return;
-//        }
-
-//        ui->filepathLE->setText(path);
-
-//        QString val;
-//        QFile file(path);
-
-//        if (!file.exists())
-//        {
-//            QMessageBox::warning(this, tr("Error"), tr("File not found"));
-//            return;
-//        }
-//        filepath = path;
-
-//        clearListWidget(ui->locationsLW);
-//        clearListWidget(ui->categoriesLW);
-//        clearListWidget(ui->itemsLW);
-
-//        ui->locationsLE->clear();
-//        ui->categoriesLE->clear();
-//        ui->itemsLE->clear();
-
-//        file.open(QIODevice::ReadOnly | QIODevice::Text);
-//        val = file.readAll();
-//        file.close();
-//        QJsonDocument doc = QJsonDocument::fromJson(val.toUtf8());
-//        jsonRootObj = doc.object();
-//        QJsonArray locations = jsonRootObj["eventLocations"].toArray();
-//        for (int i = 0; i < locations.size(); i++)
-//        {
-//            QJsonObject location = locations[i].toObject();
-//            QString title = location["locationTitle"].toString();
-//            ui->locationsLW->addItem(title);
-//        }
-
-//        setState(MainWindow::FileOpened);
-//    }
-//}
-
-
-//void MainWindow::openBtnClicked()
-//{
-//    qDebug() << "Open file";
-
-//    QString path = QFileDialog::getOpenFileName(this, tr("Open File"), "E:/SteamLibrary/steamapps/common/DayZServer/Profiles/RadioTower", tr("Files (*.json)"));
-//    this->openFile(path);
-//}
-
 void MainWindow::saveBtnClicked()
 {
     QFile file;
@@ -412,24 +334,6 @@ void MainWindow::pasteLocationBtnClicked()
 
     this->refreshView();
 }
-
-//void MainWindow::duplicateLocationBtnClicked()
-//{
-//    QJsonArray locations = jsonRootObj["eventLocations"].toArray();
-//    QList<QListWidgetItem *> selectedLocations = ui->locationsLW->selectedItems();
-
-//    for (int i = 0; i < selectedLocations.size(); i++)
-//    {
-//        int index = ui->locationsLW->indexFromItem(selectedLocations[i]).row();
-
-//        locations.append(locations[index]);
-//    }
-//    jsonRootObj["eventLocations"] = locations;
-
-//    ui->locationsLE->clear();
-//    this->refreshView();
-//    setState(MainWindow::LocationUnselected);
-//}
 
 void MainWindow::refreshView()
 {
@@ -833,32 +737,6 @@ void MainWindow::pasteVehicleAttachmentBtnClicked()
     this->refreshView();
 }
 
-//void MainWindow::duplicateVehicleAttachmentBtnClicked()
-//{
-//    QJsonArray locations, vehicleAttachments;
-//    QJsonObject location;
-//    QList<QListWidgetItem *> selectedVehicleAttachments = ui->vehicleAttachmentsLW->selectedItems();
-
-//    locations = jsonRootObj["eventLocations"].toArray();
-//    location = locations[selectedLocationIndex].toObject();
-//    vehicleAttachments = location["vehicleAttachments"].toArray();
-
-//    for (int i = 0; i < selectedVehicleAttachments.size(); i++)
-//    {
-//        int index = ui->vehicleAttachmentsLW->indexFromItem(selectedVehicleAttachments[i]).row();
-
-//        vehicleAttachments.append(vehicleAttachments[index]);
-//    }
-
-//    location["vehicleAttachments"] = vehicleAttachments;
-//    locations[selectedLocationIndex] = location;
-//    jsonRootObj["eventLocations"] = locations;
-
-//    ui->vehicleAttachmentsLE->clear();
-//    this->refreshView();
-//}
-
-
 void MainWindow::radiusSliderValueChanged(int value)
 {
     ui->locationCaptureAreaRadiusSliderValueLabel->setText(QString::number(value));
@@ -978,34 +856,6 @@ void MainWindow::pasteCategoryBtnClicked()
     this->refreshView();
 }
 
-//void MainWindow::duplicateCategoryBtnClicked()
-//{
-//    QJsonArray locations, lootCategories;
-//    QJsonObject location, loot, category;
-//    QList<QListWidgetItem *> selectedCategories = ui->categoriesLW->selectedItems();
-
-//    locations = jsonRootObj["eventLocations"].toArray();
-//    location = locations[selectedLocationIndex].toObject();
-//    loot = location["loot"].toObject();
-//    lootCategories = loot["lootCategories"].toArray();
-
-//    for (int i = 0; i < selectedCategories.size(); i++)
-//    {
-//        int index = ui->categoriesLW->indexFromItem(selectedCategories[i]).row();
-
-//        lootCategories.append(lootCategories[index]);
-//    }
-
-//    loot["lootCategories"] = lootCategories;
-//    location["loot"] = loot;
-//    locations[selectedLocationIndex] = location;
-//    jsonRootObj["eventLocations"] = locations;
-
-//    ui->categoriesLE->clear();
-//    this->refreshView();
-//    setState(MainWindow::CategoryUnselected);
-//}
-
 void MainWindow::addItemBtnClicked()
 {
     QString text = ui->itemsLE->text();
@@ -1124,38 +974,6 @@ void MainWindow::pasteItemBtnClicked()
 
     this->refreshView();
 }
-
-//void MainWindow::duplicateItemBtnClicked()
-//{
-//    QJsonArray locations, lootCategories, items;
-//    QJsonObject location, loot, category, item;
-//    QList<QListWidgetItem *> selectedCategoryLoot = ui->itemsLW->selectedItems();
-
-//    locations = jsonRootObj["eventLocations"].toArray();
-//    location = locations[selectedLocationIndex].toObject();
-//    loot = location["loot"].toObject();
-//    lootCategories = loot["lootCategories"].toArray();
-//    category = lootCategories[selectedCategoryIndex].toObject();
-//    items = category["items"].toArray();
-
-//    for (int i = 0; i < selectedCategoryLoot.size(); i++)
-//    {
-//        int index = ui->itemsLW->indexFromItem(selectedCategoryLoot[i]).row();
-
-//        items.append(items[index]);
-//    }
-
-//    category["items"] = items;
-//    lootCategories[selectedCategoryIndex] = category;
-//    loot["lootCategories"] = lootCategories;
-//    location["loot"] = loot;
-//    locations[selectedLocationIndex] = location;
-//    jsonRootObj["eventLocations"] = locations;
-
-//    ui->itemsLE->clear();
-//    this->refreshView();
-//    setState(MainWindow::ItemUnselected);
-//}
 
 void MainWindow::addAttachmentCategoryBtnClicked()
 {
@@ -1373,42 +1191,6 @@ void MainWindow::pasteAttachmentCategoryBtnClicked()
     this->refreshView();
 }
 
-//void MainWindow::duplicateAttachmentCategoryBtnClicked()
-//{
-//    QJsonArray locations, lootCategories, items, attachmentCategories;
-//    QJsonObject location, loot, category, item, attachemtnCategory;
-//    QList<QListWidgetItem *> selectedAttachmentCategories = ui->attachmentCategoriesLW->selectedItems();
-
-//    locations = jsonRootObj["eventLocations"].toArray();
-//    location = locations[selectedLocationIndex].toObject();
-//    loot = location["loot"].toObject();
-//    lootCategories = loot["lootCategories"].toArray();
-//    category = lootCategories[selectedCategoryIndex].toObject();
-//    items = category["items"].toArray();
-//    item = items[selectedItemIndex].toObject();
-//    attachmentCategories = item["attachmentCategories"].toArray();
-
-//    for (int i = 0; i < selectedAttachmentCategories.size(); i++)
-//    {
-//        int index = ui->attachmentCategoriesLW->indexFromItem(selectedAttachmentCategories[i]).row();
-
-//        attachmentCategories.append(attachmentCategories[index]);
-//    }
-
-//    item["attachmentCategories"] = attachmentCategories;
-//    items[selectedItemIndex] = item;
-//    category["items"] = items;
-//    lootCategories[selectedCategoryIndex] = category;
-//    loot["lootCategories"] = lootCategories;
-//    location["loot"] = loot;
-//    locations[selectedLocationIndex] = location;
-//    jsonRootObj["eventLocations"] = locations;
-
-//    ui->attachmentCategoriesLE->clear();
-//    this->refreshView();
-//    setState(MainWindow::AttachmentCategoryUnselected);
-//}
-
 void MainWindow::copyAttachmentBtnClicked()
 {
     QJsonArray locations, lootCategories, items, attachmentCategories, attachments;
@@ -1469,46 +1251,6 @@ void MainWindow::pasteAttachmentBtnClicked()
 
     this->refreshView();
 }
-
-//void MainWindow::duplicateAttachmentBtnClicked()
-//{
-//    QJsonArray locations, lootCategories, items, attachmentCategories, attachments;
-//    QJsonObject location, loot, category, item, attachmentCategory, attachment;
-//    QList<QListWidgetItem *> selectedAttachments = ui->attachmentsLW->selectedItems();
-
-//    locations = jsonRootObj["eventLocations"].toArray();
-//    location = locations[selectedLocationIndex].toObject();
-//    loot = location["loot"].toObject();
-//    lootCategories = loot["lootCategories"].toArray();
-//    category = lootCategories[selectedCategoryIndex].toObject();
-//    items = category["items"].toArray();
-//    item = items[selectedItemIndex].toObject();
-//    attachmentCategories = item["attachmentCategories"].toArray();
-//    attachmentCategory = attachmentCategories[selectedAttachmentCategoryIndex].toObject();
-//    attachments = attachmentCategory["attachments"].toArray();
-
-//    for (int i = 0; i < selectedAttachments.size(); i++)
-//    {
-//        int index = ui->attachmentsLW->indexFromItem(selectedAttachments[i]).row();
-
-//        attachments.append(attachments[index]);
-//    }
-
-//    attachmentCategory["attachments"] = attachments;
-//    attachmentCategories[selectedAttachmentCategoryIndex] = attachmentCategory;
-//    item["attachmentCategories"] = attachmentCategories;
-//    items[selectedItemIndex] = item;
-//    category["items"] = items;
-//    lootCategories[selectedCategoryIndex] = category;
-//    loot["lootCategories"] = lootCategories;
-//    location["loot"] = loot;
-//    locations[selectedLocationIndex] = location;
-//    jsonRootObj["eventLocations"] = locations;
-
-//    ui->attachmentsLE->clear();
-//    this->refreshView();
-//    setState(MainWindow::AttachmentUnselected);
-//}
 
 void MainWindow::locationNameLETextChanged(const QString &arg1)
 {
