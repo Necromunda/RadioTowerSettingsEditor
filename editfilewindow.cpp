@@ -99,6 +99,8 @@ MainWindow::MainWindow(QJsonObject json, QString path, QWidget *parent)
     QObject::connect(ui->attachmentCategoryProbabilityDSB,    &QDoubleSpinBox::valueChanged, this, &MainWindow::attachmentCategoryProbabilityDSBValueChanged);
     QObject::connect(ui->attachmentProbabilityDSB,            &QDoubleSpinBox::valueChanged, this, &MainWindow::attachmentProbabilityDSBValueChanged);
 
+    QObject::connect(ui->categoryLootRandomizeQuantityCheckBox, &QCheckBox::clicked, this, &MainWindow::categoryLootRandomizeQuantityCheckBoxClicked);
+
     setState(MainWindow::Init);
     setup(json, path);
 }
@@ -126,6 +128,10 @@ void MainWindow::setup(QJsonObject json, QString path)
         QString title = location["locationTitle"].toString();
         ui->locationsLW->addItem(title);
     }
+
+    // Hide these for now because we dont need them
+    ui->attachmentCategoriesTotalProbabilityLabel->hide();
+    ui->attachmentCategoriesTotalProbabilityValueLabel->hide();
 
     setState(MainWindow::FileOpened);
 }
@@ -561,6 +567,7 @@ void MainWindow::itemLWItemChanged(QListWidgetItem *current, QListWidgetItem *pr
     ui->itemNameLE->setText(item["lootItemClassName"].toString());
     ui->itemProbabilityDSB->setValue(item["probability"].toDouble());
     ui->itemQuantitySB->setValue(item["quantity"].toInt());
+    ui->categoryLootRandomizeQuantityCheckBox->setChecked(item["hasRandomQuantity"].toBool());
     ui->itemsLE->setText(itemTitle);
 
     setState(MainWindow::ItemSelected);
@@ -1807,4 +1814,43 @@ void MainWindow::attachmentProbabilityDSBValueChanged(double value)
     jsonRootObj["eventLocations"] = locations;
 
     ui->attachmentsTotalProbabilityValueLabel->setText(QString("%1").arg(totalAttachmentsProbability, 0, 'f', 5));
+}
+
+void MainWindow::categoryLootRandomizeQuantityCheckBoxClicked(bool checked)
+{
+    QJsonArray locations = jsonRootObj["eventLocations"].toArray();
+    QJsonObject location = locations[selectedLocationIndex].toObject();
+    QJsonObject loot = location["loot"].toObject();
+    QJsonArray categories = loot["lootCategories"].toArray();
+    QJsonObject category = categories[selectedCategoryIndex].toObject();
+    QJsonArray items = category["items"].toArray();
+    QJsonObject item = items[selectedItemIndex].toObject();
+
+//    if (checked)
+//    {
+//        item["HasRandomQuantity"] = checked;
+//    }
+//    else
+//    {
+//        item.remove("HasRandomQuantity");
+
+//    }
+
+
+    item["hasRandomQuantity"] = checked;
+    items[selectedItemIndex] = item;
+    category["items"] = items;
+    categories[selectedCategoryIndex] = category;
+    loot["lootCategories"] = categories;
+    location["loot"] = loot;
+    locations[selectedLocationIndex] = location;
+    jsonRootObj["eventLocations"] = locations;
+
+    if (checked)
+    {
+        if (ui->itemQuantitySB->value() <= 0)
+        {
+            ui->itemQuantitySB->setValue(1);
+        }
+    }
 }

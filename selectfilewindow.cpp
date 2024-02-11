@@ -15,9 +15,23 @@ SelectFileWindow::SelectFileWindow(QWidget *parent) :
     QObject::connect(ui->browseFilesBtn,    &QPushButton::clicked, this, &SelectFileWindow::browseFilesBtnClicked);
     QObject::connect(ui->editFileBtn,       &QPushButton::clicked, this, &SelectFileWindow::editFileBtnClicked);
     QObject::connect(ui->createNewFileBtn,  &QPushButton::clicked, this, &SelectFileWindow::createFile);
+    QObject::connect(ui->savePathBtn,       &QPushButton::clicked, this, &SelectFileWindow::savePathBtnClicked);
 
     QIcon icon = QApplication::style()->standardIcon(QStyle::SP_DirIcon);
     ui->browseFilesBtn->setIcon(icon);
+
+    initSettings();
+
+    QJsonObject settings = loadSettings();
+    QJsonValue loadedPath = settings["RTLocationsPath"];
+    if (loadedPath.isNull())
+    {
+        saveToSettings("RTLocationsPath", "");
+    }
+    else
+    {
+        ui->filepathLE->setText(loadedPath.toString());
+    }
 }
 
 SelectFileWindow::~SelectFileWindow()
@@ -146,4 +160,68 @@ void SelectFileWindow::editFileBtnClicked()
     editor->show();
     this->hide();
     QObject::connect(editor, &MainWindow::CloseWindow, this, &SelectFileWindow::editorClosed);
+}
+
+void SelectFileWindow::savePathBtnClicked()
+{
+    QString path = ui->filepathLE->text();
+
+    if (path.isEmpty())
+    {
+        QMessageBox::warning(this, tr("Error"), tr("Path is empty"));
+        return;
+    }
+
+    saveToSettings("RTLocationsPath", path, true);
+}
+
+void SelectFileWindow::initSettings()
+{
+    QDir dir = QDir(settingsFilePath);
+    if (!dir.exists())
+    {
+        dir.mkpath(settingsFilePath);
+    }
+}
+
+QJsonObject SelectFileWindow::loadSettings()
+{
+    QString val;
+    QFile file(settingsFilePath + settingsFile);
+    if (file.open(QIODevice::ReadOnly | QIODevice::Text))
+    {
+        val = file.readAll();
+        file.close();
+    }
+    QJsonDocument doc = QJsonDocument::fromJson(val.toUtf8());
+    QJsonObject jsonRootObj = doc.object();
+    return jsonRootObj;
+}
+
+void SelectFileWindow::saveToSettings(QString key, QJsonValue value, bool showPopup)
+{
+    QJsonObject root;
+    root = loadSettings();
+    root[key] = value;
+
+    QFile file(settingsFilePath + settingsFile);
+    if (file.open(QIODevice::WriteOnly | QIODevice::Text))
+    {
+        QJsonDocument doc(root);
+        QByteArray data = doc.toJson();
+        file.write(data);
+        file.close();
+
+        if (showPopup)
+        {
+            QMessageBox::information(this, tr("Save Successful"), tr("Path saved successfully."));
+        }
+    }
+    else
+    {
+        if (showPopup)
+        {
+            QMessageBox::critical(this, tr("Error"), tr("Could not save the path."));
+        }
+    }
 }

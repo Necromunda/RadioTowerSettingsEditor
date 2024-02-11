@@ -1743,6 +1743,12 @@
          <height>25</height>
         </rect>
        </property>
+       <property name="minimum">
+        <number>1</number>
+       </property>
+       <property name="maximum">
+        <number>100</number>
+       </property>
       </widget>
       <widget class="QLabel" name="itemQuantityLabel">
        <property name="geometry">
@@ -1807,6 +1813,72 @@
        </property>
        <property name="text">
         <string>Total att. cat. probability</string>
+       </property>
+      </widget>
+      <widget class="QCheckBox" name="categoryLootRandomizeQuantityCheckBox">
+       <property name="geometry">
+        <rect>
+         <x>340</x>
+         <y>50</y>
+         <width>20</width>
+         <height>41</height>
+        </rect>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>0</width>
+         <height>0</height>
+        </size>
+       </property>
+       <property name="baseSize">
+        <size>
+         <width>0</width>
+         <height>0</height>
+        </size>
+       </property>
+       <property name="layoutDirection">
+        <enum>Qt::LeftToRight</enum>
+       </property>
+       <property name="autoFillBackground">
+        <bool>false</bool>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="checked">
+        <bool>false</bool>
+       </property>
+       <property name="autoRepeat">
+        <bool>false</bool>
+       </property>
+       <property name="tristate">
+        <bool>false</bool>
+       </property>
+      </widget>
+      <widget class="QLabel" name="categoryLootRandomQuantityLabel">
+       <property name="geometry">
+        <rect>
+         <x>220</x>
+         <y>60</y>
+         <width>121</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Randomize quantity</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="categoryLootRandomQuantityInfoLabel">
+       <property name="geometry">
+        <rect>
+         <x>220</x>
+         <y>90</y>
+         <width>211</width>
+         <height>20</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>(Random quantity = 1 to Quantity)</string>
        </property>
       </widget>
      </widget>

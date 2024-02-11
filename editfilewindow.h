@@ -126,7 +126,9 @@ public slots:
     void attachmentCategoryNameLETextChanged(const QString &arg1);
     void attachmentCategoryProbabilityDSBValueChanged(double value);
     void attachmentClassNameLETextChanged(const QString &arg1);
-    void attachmentProbabilityDSBValueChanged(double value);   
+    void attachmentProbabilityDSBValueChanged(double value);
+
+    void categoryLootRandomizeQuantityCheckBoxClicked(bool checked);
 
 private:
     Ui::MainWindow *ui;
