@@ -57,6 +57,7 @@ public slots:
     void addAttachmentCategoryBtnClicked();
     void addAttachmentBtnClicked();
     void addVehicleAttachmentBtnClicked();
+    void addLocationZombiesBtnClicked();
 
     void deleteLocationBtnClicked();
     void deleteCategoryBtnClicked();
@@ -64,6 +65,7 @@ public slots:
     void deleteAttachmentCategoryBtnClicked();
     void deleteAttachmentBtnClicked();
     void deleteVehicleAttachmentBtnClicked();
+    void deleteLocationZombiesBtnClicked();
 
     void copyLocationBtnClicked();
     void copyVehicleAttachmentBtnClicked();
@@ -71,6 +73,7 @@ public slots:
     void copyItemBtnClicked();
     void copyAttachmentCategoryBtnClicked();
     void copyAttachmentBtnClicked();
+    void copyLocationZombiesBtnClicked();
 
     void pasteLocationBtnClicked();
     void pasteVehicleAttachmentBtnClicked();
@@ -78,6 +81,7 @@ public slots:
     void pasteItemBtnClicked();
     void pasteAttachmentCategoryBtnClicked();
     void pasteAttachmentBtnClicked();
+    void pasteLocationZombiesBtnClicked();
 
     void radiusSliderValueChanged(int value);
     void heightSliderValueChanged(int value);
@@ -89,6 +93,7 @@ public slots:
     void attachmentCategoryLWItemChanged(QListWidgetItem *current, QListWidgetItem *previous);
     void attachmentLWItemChanged(QListWidgetItem *current, QListWidgetItem *previous);
     void vehicleAttachmentLWItemChanged(QListWidgetItem *current, QListWidgetItem *previous);
+    void locationZombiesLWItemChanged(QListWidgetItem *current, QListWidgetItem *previous);
 
     void locationNameLETextChanged(const QString &arg1);
     void locationXCoordinateLETextChanged(const QString &arg1);
@@ -127,8 +132,10 @@ public slots:
     void attachmentCategoryProbabilityDSBValueChanged(double value);
     void attachmentClassNameLETextChanged(const QString &arg1);
     void attachmentProbabilityDSBValueChanged(double value);
-
     void categoryLootRandomizeQuantityCheckBoxClicked(bool checked);
+    void createdEventTextLETextChanged(const QString &arg1);
+    void capturedEventTextLETextChanged(const QString &arg1);
+    void endedEventTextLETextChanged(const QString &arg1);
 
 private:
     Ui::MainWindow *ui;
@@ -136,7 +143,7 @@ private:
     QJsonObject jsonRootObj;
     QString filepath;
     AppState state;
-    QJsonArray copiedLocations, copiedCategories, copiedItems, copiedAttachmentCategories, copiedAttachments, copiedVehicleAttachments;
+    QJsonArray copiedLocations, copiedCategories, copiedItems, copiedAttachmentCategories, copiedAttachments, copiedVehicleAttachments, copiedZombies;
     int selectedLocationIndex, selectedCategoryIndex, selectedItemIndex, selectedAttachmentCategoryIndex, selectedAttachmentIndex;
     double totalCategoriesProbability, totalItemsProbability, totalAttachmentCategoriesProbability, totalAttachmentsProbability;
 };

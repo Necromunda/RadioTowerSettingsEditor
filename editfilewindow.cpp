@@ -19,6 +19,7 @@ MainWindow::MainWindow(QJsonObject json, QString path, QWidget *parent)
     QObject::connect(ui->addAttachmentCategoryBtn,            &QPushButton::clicked, this, &MainWindow::addAttachmentCategoryBtnClicked);
     QObject::connect(ui->addAttachmentBtn,                    &QPushButton::clicked, this, &MainWindow::addAttachmentBtnClicked);
     QObject::connect(ui->addVehicleAttachmentBtn,             &QPushButton::clicked, this, &MainWindow::addVehicleAttachmentBtnClicked);
+    QObject::connect(ui->addLocationZombiesBtn,               &QPushButton::clicked, this, &MainWindow::addLocationZombiesBtnClicked);
 
     QObject::connect(ui->deleteLocationBtn,                   &QPushButton::clicked, this, &MainWindow::deleteLocationBtnClicked);
     QObject::connect(ui->deleteCategoryBtn,                   &QPushButton::clicked, this, &MainWindow::deleteCategoryBtnClicked);
@@ -26,20 +27,21 @@ MainWindow::MainWindow(QJsonObject json, QString path, QWidget *parent)
     QObject::connect(ui->deleteAttachmentCategoryBtn,         &QPushButton::clicked, this, &MainWindow::deleteAttachmentCategoryBtnClicked);
     QObject::connect(ui->deleteAttachmentBtn,                 &QPushButton::clicked, this, &MainWindow::deleteAttachmentBtnClicked);
     QObject::connect(ui->deleteVehicleAttachmentBtn,          &QPushButton::clicked, this, &MainWindow::deleteVehicleAttachmentBtnClicked);
+    QObject::connect(ui->deleteLocationZombiesBtn,            &QPushButton::clicked, this, &MainWindow::deleteLocationZombiesBtnClicked);
 
     QObject::connect(ui->copyLocationBtn,                     &QPushButton::clicked, this, &MainWindow::copyLocationBtnClicked);
     QObject::connect(ui->copyVehicleAttachmentBtn,            &QPushButton::clicked, this, &MainWindow::copyVehicleAttachmentBtnClicked);
     QObject::connect(ui->copyCategoryBtn,                     &QPushButton::clicked, this, &MainWindow::copyCategoryBtnClicked);
     QObject::connect(ui->copyItemBtn,                         &QPushButton::clicked, this, &MainWindow::copyItemBtnClicked);
     QObject::connect(ui->copyAttachmentCategoryBtn,           &QPushButton::clicked, this, &MainWindow::copyAttachmentCategoryBtnClicked);
-    QObject::connect(ui->copyAttachmentBtn,                   &QPushButton::clicked, this, &MainWindow::copyAttachmentBtnClicked);
+    QObject::connect(ui->copyLocationZombiesBtn,              &QPushButton::clicked, this, &MainWindow::copyLocationZombiesBtnClicked);
 
     QObject::connect(ui->pasteLocationBtn,                    &QPushButton::clicked, this, &MainWindow::pasteLocationBtnClicked);
     QObject::connect(ui->pasteVehicleAttachmentBtn,           &QPushButton::clicked, this, &MainWindow::pasteVehicleAttachmentBtnClicked);
     QObject::connect(ui->pasteCategoryBtn,                    &QPushButton::clicked, this, &MainWindow::pasteCategoryBtnClicked);
     QObject::connect(ui->pasteItemBtn,                        &QPushButton::clicked, this, &MainWindow::pasteItemBtnClicked);
     QObject::connect(ui->pasteAttachmentCategoryBtn,          &QPushButton::clicked, this, &MainWindow::pasteAttachmentCategoryBtnClicked);
-    QObject::connect(ui->pasteAttachmentBtn,                  &QPushButton::clicked, this, &MainWindow::pasteAttachmentBtnClicked);
+    QObject::connect(ui->pasteLocationZombiesBtn,             &QPushButton::clicked, this, &MainWindow::pasteLocationZombiesBtnClicked);
 
     QObject::connect(ui->locationCaptureAreaRadiusSlider,     &QSlider::valueChanged, this, &MainWindow::radiusSliderValueChanged);
     QObject::connect(ui->locationCaptureAreaHeightSlider,     &QSlider::valueChanged, this, &MainWindow::heightSliderValueChanged);
@@ -51,6 +53,7 @@ MainWindow::MainWindow(QJsonObject json, QString path, QWidget *parent)
     QObject::connect(ui->attachmentCategoriesLW,              &QListWidget::currentItemChanged, this, &MainWindow::attachmentCategoryLWItemChanged);
     QObject::connect(ui->attachmentsLW,                       &QListWidget::currentItemChanged, this, &MainWindow::attachmentLWItemChanged);
     QObject::connect(ui->vehicleAttachmentsLW,                &QListWidget::currentItemChanged, this, &MainWindow::vehicleAttachmentLWItemChanged);
+    QObject::connect(ui->locationZombiesLW,                   &QListWidget::currentItemChanged, this, &MainWindow::locationZombiesLWItemChanged);
 
     QObject::connect(ui->locationNameLE,                      &QLineEdit::textChanged, this, &MainWindow::locationNameLETextChanged);
     QObject::connect(ui->locationLootcrateLE,                 &QLineEdit::textChanged, this, &MainWindow::locationLootcrateClassNameLETextChanged);
@@ -83,6 +86,10 @@ MainWindow::MainWindow(QJsonObject json, QString path, QWidget *parent)
     QObject::connect(ui->locationROrientationLE,              &QLineEdit::textChanged, this, &MainWindow::locationROrientationLETextChanged);
     QObject::connect(ui->locationVehicleROrientationLE,       &QLineEdit::textChanged, this, &MainWindow::locationVehicleROrientationLETextChanged);
     QObject::connect(ui->locationLootcrateROrientationLE,     &QLineEdit::textChanged, this, &MainWindow::locationLootcrateROrientationLETextChanged);
+
+    QObject::connect(ui->createdEventTextLE,                  &QLineEdit::textChanged, this, &MainWindow::createdEventTextLETextChanged);
+    QObject::connect(ui->capturedEventTextLE,                 &QLineEdit::textChanged, this, &MainWindow::capturedEventTextLETextChanged);
+    QObject::connect(ui->endedEventTextLE,                    &QLineEdit::textChanged, this, &MainWindow::endedEventTextLETextChanged);
 
     QObject::connect(ui->locationCaptureAreaRadiusSlider,     &QSlider::valueChanged, this, &MainWindow::locationCaptureAreaRadiusSliderValueChanged);
     QObject::connect(ui->locationCaptureAreaHeightSlider,     &QSlider::valueChanged, this, &MainWindow::locationCaptureAreaHeightSliderValueChanged);
@@ -132,6 +139,9 @@ void MainWindow::setup(QJsonObject json, QString path)
     // Hide these for now because we dont need them
     ui->attachmentCategoriesTotalProbabilityLabel->hide();
     ui->attachmentCategoriesTotalProbabilityValueLabel->hide();
+
+    qDebug() << jsonRootObj["version"].toInt();
+    ui->versionValueLabel->setText(QString::number(jsonRootObj["version"].toInt()));
 
     setState(MainWindow::FileOpened);
 }
@@ -349,6 +359,7 @@ void MainWindow::refreshView()
     clearListWidget(ui->attachmentCategoriesLW);
     clearListWidget(ui->attachmentsLW);
     clearListWidget(ui->vehicleAttachmentsLW);
+    clearListWidget(ui->locationZombiesLW);
 
     QJsonArray locations = jsonRootObj["eventLocations"].toArray();
     for (int i = 0; i < locations.size(); i++)
@@ -363,6 +374,13 @@ void MainWindow::refreshView()
     {
         QString vehicleAttachment = vehicleAttachments[i].toString();
         ui->vehicleAttachmentsLW->addItem(vehicleAttachment);
+    }
+
+    QJsonArray locationZombies = locations[selectedLocationIndex].toObject()["zombies"].toArray();
+    for (int i = 0; i < locationZombies.size(); i++)
+    {
+        QString zombie = locationZombies[i].toString();
+        ui->locationZombiesLW->addItem(zombie);
     }
 
     totalCategoriesProbability = 0.0;
@@ -421,14 +439,14 @@ void MainWindow::locationLWItemChanged(QListWidgetItem *current, QListWidgetItem
 {
     clearListWidget(ui->categoriesLW);
     clearListWidget(ui->vehicleAttachmentsLW);
+    clearListWidget(ui->locationZombiesLW);
 
     ui->categoriesLE->clear();
     ui->itemsLE->clear();
     ui->vehicleAttachmentsLE->clear();
+    ui->locationZombiesLE->clear();
 
     selectedLocationIndex = ui->locationsLW->indexFromItem(current).row();
-
-//    qDebug() << "Selected location at index " << selectedLocationIndex;
 
     QString locationTitle = current->text();
     QJsonArray locations = jsonRootObj["eventLocations"].toArray();
@@ -442,12 +460,19 @@ void MainWindow::locationLWItemChanged(QListWidgetItem *current, QListWidgetItem
     QJsonArray vehicleCoordinates = location["vehicleCoordinatesXYZ"].toArray();
     QJsonArray vehicleOrientation = location["vehicleOrientationYPR"].toArray();
     QJsonArray vehicleAttachments = location["vehicleAttachments"].toArray();
+    QJsonArray locationZombies = location["zombies"].toArray();
     totalCategoriesProbability = 0.0;
 
     for (int i = 0; i < vehicleAttachments.size(); i++)
     {
         QString attachment = vehicleAttachments[i].toString();
         ui->vehicleAttachmentsLW->addItem(attachment);
+    }
+
+    for (int i = 0; i < locationZombies.size(); i++)
+    {
+        QString zombie = locationZombies[i].toString();
+        ui->locationZombiesLW->addItem(zombie);
     }
 
     totalCategoriesProbability = 0.0;
@@ -489,6 +514,9 @@ void MainWindow::locationLWItemChanged(QListWidgetItem *current, QListWidgetItem
     ui->locationZombieCountSB->setValue(location["zombieCount"].toInt());
     ui->locationLootCountSB->setValue(locationLoot["lootCount"].toInt());
     ui->locationsLE->setText(locationTitle);
+    ui->createdEventTextLE->setText(location["createdNotificationTitle"].toString());
+    ui->capturedEventTextLE->setText(location["capturedNotificationTitle"].toString());
+    ui->endedEventTextLE->setText(location["endedNotificationTitle"].toString());
 
     setState(MainWindow::LocationSelected);
 }
@@ -738,6 +766,102 @@ void MainWindow::pasteVehicleAttachmentBtnClicked()
     }
 
     location["vehicleAttachments"] = vehicleAttachments;
+    locations[selectedLocationIndex] = location;
+    jsonRootObj["eventLocations"] = locations;
+
+    this->refreshView();
+}
+
+void MainWindow::locationZombiesLWItemChanged(QListWidgetItem *current, QListWidgetItem *previous)
+{
+    ui->locationZombiesLE->setText(current->text());
+}
+
+void MainWindow::addLocationZombiesBtnClicked()
+{
+    QString text = ui->locationZombiesLE->text();
+    if (text.isEmpty()) return;
+
+    QJsonArray locations, zombies;
+    QJsonObject location;
+    locations = jsonRootObj["eventLocations"].toArray();
+    location = locations[selectedLocationIndex].toObject();
+    zombies = location["zombies"].toArray();
+
+    zombies.append(QJsonValue::fromVariant(text));
+
+    location["zombies"] = zombies;
+    locations[selectedLocationIndex] = location;
+    jsonRootObj["eventLocations"] = locations;
+
+    this->refreshView();
+}
+
+void MainWindow::deleteLocationZombiesBtnClicked()
+{
+    QJsonArray locations, zombies;
+    QJsonObject location;
+    QList<QListWidgetItem *> selectedZombies = ui->locationZombiesLW->selectedItems();
+    QList<int> deleteIndexes = {};
+
+    locations = jsonRootObj["eventLocations"].toArray();
+    location = locations[selectedLocationIndex].toObject();
+    zombies = location["zombies"].toArray();
+
+    for (int i = 0; i < selectedZombies.size(); i++)
+    {
+        deleteIndexes.append(ui->locationZombiesLW->indexFromItem(selectedZombies[i]).row());
+    }
+
+    std::sort(deleteIndexes.begin(), deleteIndexes.end());
+    std::reverse(deleteIndexes.begin(), deleteIndexes.end());
+
+    for (int i = 0; i < deleteIndexes.size(); i++)
+    {
+        zombies.removeAt(deleteIndexes[i]);
+    }
+
+    location["zombies"] = zombies;
+    locations[selectedLocationIndex] = location;
+    jsonRootObj["eventLocations"] = locations;
+
+    ui->locationZombiesLE->clear();
+    this->refreshView();
+}
+
+void MainWindow::copyLocationZombiesBtnClicked()
+{
+    QJsonArray locations, zombies;
+    QJsonObject location;
+    QList<QListWidgetItem *> selectedZombies = ui->locationZombiesLW->selectedItems();
+
+    locations = jsonRootObj["eventLocations"].toArray();
+    location = locations[selectedLocationIndex].toObject();
+    zombies = location["zombies"].toArray();
+
+    copiedZombies = {};
+    for (int i = 0; i < selectedZombies.size(); i++)
+    {
+        int index = ui->locationZombiesLW->indexFromItem(selectedZombies[i]).row();
+
+        copiedZombies.append(zombies[index]);
+    }
+}
+
+void MainWindow::pasteLocationZombiesBtnClicked()
+{
+    QJsonArray locations, zombies;
+    QJsonObject location;
+
+    locations = jsonRootObj["eventLocations"].toArray();
+    location = locations[selectedLocationIndex].toObject();
+    zombies = location["zombies"].toArray();
+
+    foreach (auto zombie, copiedZombies) {
+        zombies.append(zombie);
+    }
+
+    location["zombies"] = zombies;
     locations[selectedLocationIndex] = location;
     jsonRootObj["eventLocations"] = locations;
 
@@ -1853,4 +1977,34 @@ void MainWindow::categoryLootRandomizeQuantityCheckBoxClicked(bool checked)
             ui->itemQuantitySB->setValue(1);
         }
     }
+}
+
+void MainWindow::createdEventTextLETextChanged(const QString &arg1)
+{
+    QJsonArray locations = jsonRootObj["eventLocations"].toArray();
+    QJsonObject location = locations[selectedLocationIndex].toObject();
+
+    location["createdNotificationTitle"] = arg1;
+    locations[selectedLocationIndex] = location;
+    jsonRootObj["eventLocations"] = locations;
+}
+
+void MainWindow::capturedEventTextLETextChanged(const QString &arg1)
+{
+    QJsonArray locations = jsonRootObj["eventLocations"].toArray();
+    QJsonObject location = locations[selectedLocationIndex].toObject();
+
+    location["capturedNotificationTitle"] = arg1;
+    locations[selectedLocationIndex] = location;
+    jsonRootObj["eventLocations"] = locations;
+}
+
+void MainWindow::endedEventTextLETextChanged(const QString &arg1)
+{
+    QJsonArray locations = jsonRootObj["eventLocations"].toArray();
+    QJsonObject location = locations[selectedLocationIndex].toObject();
+
+    location["endedNotificationTitle"] = arg1;
+    locations[selectedLocationIndex] = location;
+    jsonRootObj["eventLocations"] = locations;
 }
